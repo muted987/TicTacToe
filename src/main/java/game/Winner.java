@@ -6,9 +6,9 @@ import main.java.symbol.Symbol;
 import java.util.ArrayList;
 
 public class Winner {
-    private boolean isWin;
-    private Symbol winnerSymbol;
-    private ArrayList<Coordinates> winPositions;
+    private final boolean isWin;
+    private final Symbol winnerSymbol;
+    private final ArrayList<Coordinates> winPositions;
     public Winner(boolean isWin, Symbol winnerSymbol, ArrayList<Coordinates> winPositions) {
         this.isWin = isWin;
         this.winnerSymbol = winnerSymbol;
