@@ -1,0 +1,58 @@
+package main.java.game;
+
+
+import main.java.gameMap.Coordinates;
+import main.java.gameMap.GameMap;
+import main.java.gameMap.GameMapRender;
+import main.java.symbol.OSymbol;
+import main.java.symbol.XSymbol;
+
+public class Game {
+
+    public void game() {
+        GameMap map = new GameMap();
+        GameMapRender render = new GameMapRender();
+        boolean xFirstMove = true;
+        while (true) {
+            Winner winner = WinCheck.winChecker(map);
+            if (winner.isWin()) {
+                render.render(map, winner.getWinPositions());
+                System.out.println("GAME OVER");
+                String winnerSymbol = winner.getWinnerSymbol().getSymbolCaption();
+                System.out.printf("%s is winner", winnerSymbol);
+                break;
+            }
+            if (map.isAnyFreeSpace()) {
+                render.render(map, null);
+                System.out.println("TIE");
+                break;
+            }
+            render.render(map, null);
+            if (xFirstMove) {
+                System.out.println("╳ turn");
+                while (true) {
+                    Coordinates coordinates = CoordinatesInput.coordinatesInput();
+                    if (map.isFieldEmpty(coordinates)) {
+                        map.setSymbol(coordinates, new XSymbol("╳", coordinates));
+                        break;
+                    } else {
+                        System.out.println("Field is not empty.");
+                    }
+                }
+            } else {
+                System.out.println("о turn");
+                while (true) {
+                    Coordinates coordinates = CoordinatesInput.coordinatesInput();
+                    if (map.isFieldEmpty(coordinates)) {
+                        map.setSymbol(coordinates, new OSymbol("о", coordinates));
+                        break;
+                    } else {
+                        render.render(map, null);
+                        System.out.println("Field is not empty.");
+                    }
+                }
+            }
+            xFirstMove =! xFirstMove;
+        }
+    }
+}
