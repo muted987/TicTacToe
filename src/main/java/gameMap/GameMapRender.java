@@ -28,7 +28,6 @@ public class GameMapRender {
         }
         System.out.println("\n");
     }
-
     public String colorizeField(String sprite) {
         final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
         final String ANSI_BLACK_COLOR = "\u001B[30m";

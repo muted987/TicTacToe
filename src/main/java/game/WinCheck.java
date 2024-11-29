@@ -33,7 +33,7 @@ public class WinCheck {
             for (int y = 1; y < 4; y++) {
                 Coordinates coordinates = new Coordinates(x, y);
                 try {
-                    boolean checkField = (map.getSymbol(coordinates).getClass()).equals(symbolToCheck.getClass());
+                    boolean checkField = map.getSymbol(coordinates).getSymbolCaption().equals(symbolToCheck.getSymbolCaption());
                     if (checkField) {
                         row.add(true);
                         rowCoordinates.add(coordinates);
@@ -56,9 +56,10 @@ public class WinCheck {
             for (int x = 1; x < 4; x++) {
                 Coordinates coordinates = new Coordinates(x, y);
                 try {
-                    boolean checkField = (map.getSymbol(coordinates).getClass()).equals(symbolToCheck.getClass());
+                    boolean checkField = map.getSymbol(coordinates).getSymbolCaption().equals(symbolToCheck.getSymbolCaption());
                     if (checkField) {
                         column.add(true);
+                        columnCoordinates.add(coordinates);
                     }
                 } catch (Exception ignored) {
                 }
@@ -76,7 +77,7 @@ public class WinCheck {
         for (int x = 1, y = 1; x < 4 && y < 4; x++, y++) {
             Coordinates coordinates = new Coordinates(x, y);
             try {
-                boolean checkField = (map.getSymbol(coordinates).getClass()).equals(symbolToCheck.getClass());
+                boolean checkField = map.getSymbol(coordinates).getSymbolCaption().equals(symbolToCheck.getSymbolCaption());
                 if (checkField) {
                     diagonal.add(true);
                     diagonalCoordinates.add(coordinates);
@@ -93,7 +94,7 @@ public class WinCheck {
         for (int x = 1, y = 3; x < 4 && y > 0; x++, y--) {
             Coordinates coordinates = new Coordinates(x, y);
             try {
-                boolean checkField = (map.getSymbol(coordinates).getClass()).equals(symbolToCheck.getClass());
+                boolean checkField = map.getSymbol(coordinates).getSymbolCaption().equals(symbolToCheck.getSymbolCaption());
                 if (checkField) {
                     diagonal.add(true);
                     diagonalCoordinates.add(coordinates);
