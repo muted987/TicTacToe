@@ -2,7 +2,7 @@ package main.java.game;
 
 import main.java.gameMap.Coordinates;
 import main.java.gameMap.GameMap;
-import main.java.symbol.Symbol;
+import main.java.objects.symbol.Symbol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +56,7 @@ public class WinCheck {
             if (map.getSymbol(firstDiagonalCoordinates.get(0)).equals(map.getSymbol(firstDiagonalCoordinates.get(1))) && map.getSymbol(firstDiagonalCoordinates.get(0)).equals(map.getSymbol(firstDiagonalCoordinates.get(2)))) {
                 return new Winner(true, map.getSymbol(firstDiagonalCoordinates.get(0)), firstDiagonalCoordinates);
             }
-            if (map.getSymbol(secondDiagonalCoordinates.get(0)).equals(map.getSymbol(secondDiagonalCoordinates.get(1))) && map.getSymbol(firstDiagonalCoordinates.get(0)).equals(map.getSymbol(secondDiagonalCoordinates.get(2)))) {
+            if (map.getSymbol(secondDiagonalCoordinates.get(0)).equals(map.getSymbol(secondDiagonalCoordinates.get(1))) && map.getSymbol(secondDiagonalCoordinates.get(0)).equals(map.getSymbol(secondDiagonalCoordinates.get(2)))) {
                 return new Winner(true, map.getSymbol(secondDiagonalCoordinates.get(0)), secondDiagonalCoordinates);
             }
         } catch (Exception ignored) {
