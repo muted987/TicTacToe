@@ -9,14 +9,19 @@ public class Game {
     private static final GameMapRender render = new GameMapRender();
     private static final int PLAYER_VS_BOT_GAME_MODE_CODE = 1;
     private static final int BOT_VS_BOT_GAME_MODE_CODE = 2;
+    private static final int EXIT_GAME_CODE = -400;
 
     public void game() {
-        GameMap map = new GameMap();
-        int gameMode = GameStart.start();
-        if (gameMode == PLAYER_VS_BOT_GAME_MODE_CODE) {
-            playerVsBotGame(map);
-        } else if (gameMode == BOT_VS_BOT_GAME_MODE_CODE) {
-            botVsBotGame(map);
+        while (true) {
+            GameMap map = new GameMap();
+            int gameMode = GameRender.start();
+            if (gameMode == EXIT_GAME_CODE) break;
+            if (gameMode == PLAYER_VS_BOT_GAME_MODE_CODE) {
+                playerVsBotGame(map);
+            } else if (gameMode == BOT_VS_BOT_GAME_MODE_CODE) {
+                botVsBotGame(map);
+            }
+            System.out.println("-------------------------------------------");
         }
     }
     private void botVsBotGame(GameMap map) {
@@ -60,7 +65,7 @@ public class Game {
             render.render(map, winner.getWinPositions());
             System.out.println("GAME OVER");
             String winnerSymbol = winner.getWinnerSymbol().getSymbolCaption();
-            System.out.printf("%s is winner", winnerSymbol);
+            System.out.printf("%s is winner\n", winnerSymbol);
             return true;
         }
         if (map.isNoFreeSpace()) {
