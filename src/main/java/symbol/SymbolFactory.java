@@ -7,8 +7,7 @@ public class SymbolFactory {
         if (turnOrder) {
             return new XSymbol("╳", coordinates);
         } else {
-            return new XSymbol("о", coordinates);
-
+            return new OSymbol("о", coordinates);
         }
     }
 }
