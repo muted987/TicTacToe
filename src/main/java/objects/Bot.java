@@ -11,7 +11,6 @@ public class Bot {
     public void makeMove(GameMap map, boolean turnOrder) {
         Random random = new Random();
         SymbolFactory symbolFactory = new SymbolFactory();
-
         List<Coordinates> availableCoordinates = map.getEmptyFields();
         int randomIndexOfAvailableCoordinatesList = random.nextInt(availableCoordinates.size());
         Coordinates coordinates = availableCoordinates.get(randomIndexOfAvailableCoordinatesList);
