@@ -5,7 +5,6 @@ import main.java.gameMap.Coordinates;
 import java.util.Scanner;
 
 public class CoordinatesInput {
-
     public static Coordinates coordinatesInput() {
         Scanner scanner = new Scanner(System.in);
         int x;
