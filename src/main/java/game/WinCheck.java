@@ -5,10 +5,10 @@ import main.java.gameMap.GameMap;
 import main.java.symbol.Symbol;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class WinCheck {
-
-
     public static Winner winChecker(GameMap map) {
         Winner winOnRow = checkRow(map);
         Winner winOnColumn = checkColumn(map);
@@ -24,86 +24,57 @@ public class WinCheck {
         }
         return new Winner(false, null, new ArrayList<>());
     }
-
     public static Winner checkRow(GameMap map) {
         for (int x = 1; x < 4; x++) {
             Symbol symbolToCheck = map.getSymbol(new Coordinates(x, 1));
-            ArrayList<Boolean> row = new ArrayList<>();
-            ArrayList<Coordinates> rowCoordinates = new ArrayList<>();
+            List<Boolean> lineToCheck = new ArrayList<>();
+            List<Coordinates> coordinatesOfLine = new ArrayList<>();
             for (int y = 1; y < 4; y++) {
-                Coordinates coordinates = new Coordinates(x, y);
-                try {
-                    boolean checkField = map.getSymbol(coordinates).getSymbolCaption().equals(symbolToCheck.getSymbolCaption());
-                    if (checkField) {
-                        row.add(true);
-                        rowCoordinates.add(coordinates);
-                    }
-                } catch (Exception ignored) {
-                }
-            }
-            if (!row.contains(false) && row.size() == 3) {
-                return new Winner(true, symbolToCheck, rowCoordinates);
+                Winner winner = checker(x, y, map, symbolToCheck, lineToCheck, coordinatesOfLine);
+                if (winner.isWin()) return winner;
             }
         }
         return new Winner(false, map.getSymbol(new Coordinates(1, 1)), new ArrayList<>());
     }
-
-    public static Winner checkColumn(GameMap map){
+    public static Winner checkColumn(GameMap map) {
         for (int y = 1; y < 4; y++) {
             Symbol symbolToCheck = map.getSymbol(new Coordinates(1, y));
-            ArrayList<Boolean> column = new ArrayList<>();
-            ArrayList<Coordinates> columnCoordinates = new ArrayList<>();
+            List<Boolean> lineToCheck = new ArrayList<>();
+            List<Coordinates> coordinatesOfLine = new ArrayList<>();
             for (int x = 1; x < 4; x++) {
-                Coordinates coordinates = new Coordinates(x, y);
-                try {
-                    boolean checkField = map.getSymbol(coordinates).getSymbolCaption().equals(symbolToCheck.getSymbolCaption());
-                    if (checkField) {
-                        column.add(true);
-                        columnCoordinates.add(coordinates);
-                    }
-                } catch (Exception ignored) {
-                }
+                Winner winner = checker(x, y, map, symbolToCheck, lineToCheck, coordinatesOfLine);
+                if (winner.isWin()) return winner;
             }
-            if (!column.contains(false) && column.size() == 3) {
-                return new Winner(true, symbolToCheck, columnCoordinates);
-            }
+
         }
         return new Winner(false, map.getSymbol(new Coordinates(1, 1)), new ArrayList<>());
     }
     public static Winner checkDiagonal(GameMap map) {
-        ArrayList<Boolean> diagonal = new ArrayList<>();
-        ArrayList<Coordinates> diagonalCoordinates = new ArrayList<>();
-        Symbol symbolToCheck = map.getSymbol(new Coordinates(1, 1));
-        for (int x = 1, y = 1; x < 4 && y < 4; x++, y++) {
-            Coordinates coordinates = new Coordinates(x, y);
-            try {
-                boolean checkField = map.getSymbol(coordinates).getSymbolCaption().equals(symbolToCheck.getSymbolCaption());
-                if (checkField) {
-                    diagonal.add(true);
-                    diagonalCoordinates.add(coordinates);
-                }
-            } catch (Exception ignored) {
+        List<Coordinates> firstDiagonalCoordinates = Arrays.asList(new Coordinates(1, 1), new Coordinates(2, 2), new Coordinates(3, 3));
+        List<Coordinates> secondDiagonalCoordinates = Arrays.asList(new Coordinates(1, 3), new Coordinates(2, 2), new Coordinates(3, 1));
+        try {
+            if (map.getSymbol(firstDiagonalCoordinates.get(0)).equals(map.getSymbol(firstDiagonalCoordinates.get(1))) && map.getSymbol(firstDiagonalCoordinates.get(0)).equals(map.getSymbol(firstDiagonalCoordinates.get(2)))) {
+                return new Winner(true, map.getSymbol(firstDiagonalCoordinates.get(0)), firstDiagonalCoordinates);
             }
-        }
-        if (!diagonal.contains(false) && diagonal.size() == 3) {
-            return new Winner(true, symbolToCheck, diagonalCoordinates);
-        }
-        diagonal = new ArrayList<>();
-        diagonalCoordinates = new ArrayList<>();
-        symbolToCheck = map.getSymbol(new Coordinates(1, 3));
-        for (int x = 1, y = 3; x < 4 && y > 0; x++, y--) {
-            Coordinates coordinates = new Coordinates(x, y);
-            try {
-                boolean checkField = map.getSymbol(coordinates).getSymbolCaption().equals(symbolToCheck.getSymbolCaption());
-                if (checkField) {
-                    diagonal.add(true);
-                    diagonalCoordinates.add(coordinates);
-                }
-            } catch (Exception ignored) {
+            if (map.getSymbol(secondDiagonalCoordinates.get(0)).equals(map.getSymbol(secondDiagonalCoordinates.get(1))) && map.getSymbol(firstDiagonalCoordinates.get(0)).equals(map.getSymbol(secondDiagonalCoordinates.get(2)))) {
+                return new Winner(true, map.getSymbol(secondDiagonalCoordinates.get(0)), secondDiagonalCoordinates);
             }
+        } catch (Exception ignored) {
         }
-        if (!diagonal.contains(false) && diagonal.size() == 3) {
-            return new Winner(true, symbolToCheck, diagonalCoordinates);
+        return new Winner(false, map.getSymbol(new Coordinates(1, 1)), new ArrayList<>());
+    }
+    public static Winner checker(int x, int y, GameMap map, Symbol symbolToCheck, List<Boolean> lineToCheck, List<Coordinates> coordinatesOfLine) {
+        Coordinates coordinates = new Coordinates(x, y);
+        try {
+            boolean checkField = map.getSymbol(coordinates).equals(symbolToCheck);
+            if (checkField) {
+                lineToCheck.add(true);
+                coordinatesOfLine.add(coordinates);
+            }
+        } catch (Exception ignored) {
+        }
+        if (!lineToCheck.contains(false) && lineToCheck.size() == 3) {
+            return new Winner(true, symbolToCheck, coordinatesOfLine);
         }
         return new Winner(false, map.getSymbol(new Coordinates(1, 1)), new ArrayList<>());
     }

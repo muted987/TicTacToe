@@ -3,13 +3,13 @@ package main.java.game;
 import main.java.gameMap.Coordinates;
 import main.java.symbol.Symbol;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Winner {
     private final boolean isWin;
     private final Symbol winnerSymbol;
-    private final ArrayList<Coordinates> winPositions;
-    public Winner(boolean isWin, Symbol winnerSymbol, ArrayList<Coordinates> winPositions) {
+    private final List<Coordinates> winPositions;
+    public Winner(boolean isWin, Symbol winnerSymbol, List<Coordinates> winPositions) {
         this.isWin = isWin;
         this.winnerSymbol = winnerSymbol;
         this.winPositions = winPositions;
@@ -20,7 +20,7 @@ public class Winner {
     public Symbol getWinnerSymbol() {
         return winnerSymbol;
     }
-    public ArrayList<Coordinates> getWinPositions() {
+    public List<Coordinates> getWinPositions() {
         return winPositions;
     }
 }

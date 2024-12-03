@@ -2,10 +2,10 @@ package main.java.gameMap;
 
 import main.java.symbol.Symbol;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class GameMapRender {
-    public void render(GameMap map, ArrayList<Coordinates> winnerPositions) {
+    public void render(GameMap map, List<Coordinates> winnerPositions) {
         for (int x = 1; x <= 3; x++) {
             StringBuilder line = new StringBuilder();
             line.append("|");
@@ -34,7 +34,6 @@ public class GameMapRender {
         final String ANSI_RESET = "\u001B[0m";
         return ANSI_GREEN_BACKGROUND + ANSI_BLACK_COLOR + sprite + ANSI_RESET;
     }
-
     public String getColorizedString(Symbol symbol) {
         return colorizeField("  " + symbol.getSymbolCaption() + "  ");
     }
@@ -44,7 +43,6 @@ public class GameMapRender {
     public String ColorlessString(Symbol symbol) {
         return ("  " + symbol.getSymbolCaption() + "  |");
     }
-
     public String getString(Coordinates coordinates, GameMap map) {
         String result;
         if (map.isFieldEmpty(coordinates)){
@@ -54,5 +52,4 @@ public class GameMapRender {
         }
         return result;
     }
-
 }
