@@ -1,4 +1,4 @@
-package main.java.symbol;
+package main.java.objects.symbol;
 
 import main.java.gameMap.Coordinates;
 

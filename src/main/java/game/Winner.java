@@ -1,7 +1,7 @@
 package main.java.game;
 
 import main.java.gameMap.Coordinates;
-import main.java.symbol.Symbol;
+import main.java.objects.symbol.Symbol;
 
 import java.util.List;
 

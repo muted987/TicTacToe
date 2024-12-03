@@ -1,6 +1,6 @@
 package main.java.gameMap;
 
-import main.java.symbol.Symbol;
+import main.java.objects.symbol.Symbol;
 
 import java.util.List;
 
