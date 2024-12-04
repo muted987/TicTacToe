@@ -4,12 +4,10 @@ import main.java.gameMap.Coordinates;
 
 import java.util.Objects;
 
-public abstract class Symbol {
-    private final String SymbolCaption;
-    private final Coordinates coordinates;
-    public Symbol(String symbolCaption, Coordinates coordinates) {
+public class Symbol {
+    private final SymbolCaption SymbolCaption;
+    public Symbol(SymbolCaption symbolCaption) {
         SymbolCaption = symbolCaption;
-        this.coordinates = coordinates;
     }
     @Override
     public boolean equals(Object o) {
@@ -17,13 +15,13 @@ public abstract class Symbol {
         if (o == null || getClass() != o.getClass()) return false;
         Symbol symbol = (Symbol) o;
         if (((Symbol) o).getSymbolCaption().equals(this.getSymbolCaption())) return true;
-        return Objects.equals(SymbolCaption, symbol.SymbolCaption) && Objects.equals(coordinates, symbol.coordinates);
+        return Objects.equals(SymbolCaption, symbol.SymbolCaption);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(SymbolCaption, coordinates);
+        return Objects.hash(SymbolCaption);
     }
     public String getSymbolCaption() {
-        return SymbolCaption;
+        return SymbolCaption.getSymbol();
     }
 }
